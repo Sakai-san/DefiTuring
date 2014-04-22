@@ -1,4 +1,6 @@
-login.txt
-*.js
-*sublime*
 *.*~
+.project
+.settings
+.classpath
+.cache
+bin

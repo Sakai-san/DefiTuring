@@ -252,7 +252,7 @@ object Mathematics {
 	
 		Outer.breakable {
 	      while (  true  ) {
-	        if(firstLoop.head > s || firstLoop.isEmpty ){Outer.break;}
+	        if(firstLoop.isEmpty || firstLoop.head > s ){Outer.break;}
 	        else{
 	    	  Outer.breakable {
 		    	  while( true ) {
@@ -289,6 +289,24 @@ object Mathematics {
   	  couples
   	}
   	
+  	
+  	
+  	
+  /**
+   * This method gets the chain factorial of n, e.g. 169 -> 363601 -> 1454 -> 169.
+   *
+   * @param BigInt
+   * @return List[BigInt]
+   */
+  	
+  	def chainFactorial( start :BigInt ) :List[BigInt] = {
+  	  
+	  def aux( chain :List[BigInt] ) :List[BigInt] = {
+		  if(  chain.contains( sumFactoDigitConcise( chain.head.toString ) ))  chain
+		  else{ aux( List(sumFactoDigitConcise(chain.head.toString)) ::: chain ) }
+	  }
+	  aux( List(start) )
+  	}
   
   	
   /**
@@ -542,6 +560,12 @@ object Mathematics {
   }}
   
   
+   /**
+   * This method computes the sum of factorial digit n is composed of.
+   *
+   * @param String
+   * @return BigInt
+   */
   def sumFactoDigitConcise(numberString: String): BigInt = numberString.map(i => factorial(BigInt(i.toString))).sum
 
   def allDigitDifferent(numberString: String): Boolean = numberString.distinct.length == 9
