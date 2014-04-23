@@ -300,10 +300,9 @@ object Mathematics {
    */
   	
   	def chainFactorial( start :BigInt ) :List[BigInt] = {
-  	  
 	  def aux( chain :List[BigInt] ) :List[BigInt] = {
-		  if(  chain.contains( sumFactoDigitConcise( chain.head.toString ) ))  chain
-		  else{ aux( List(sumFactoDigitConcise(chain.head.toString)) ::: chain ) }
+		  if(  chain.contains( sumFactoDigit( chain.head.toString) ))  chain
+		  else aux( List(sumFactoDigit(chain.head.toString)) ::: chain )
 	  }
 	  aux( List(start) )
   	}
@@ -397,8 +396,8 @@ object Mathematics {
     
   /*
     factorial gives the factorial number of an integer
-    arg			n Integer
-    return		Integer
+    arg			n BigInt
+    return		n BigInt
    */
   def factorial(n: BigInt): BigInt = {
     if (n <= 1) 1
@@ -407,17 +406,17 @@ object Mathematics {
 
   /*
     tailRecursiveFactorial gives the factorial number of an integer
-    arg			n Int
-    return		Int
+    arg			n BigInt
+    return		BigInt
    */
-  def tailRecursiveFactorial(n: Int) = {
+  def tailRecursiveFactorial(n: BigInt):BigInt = {
 
-    def fac(accumulator: Int, currentRank: Int): Int = {
-      if (currentRank == n) accumulator
+    def fac(accumulator: BigInt, currentRank: BigInt): BigInt = {
+      if (currentRank <= 1) accumulator
       else
-        fac(accumulator * currentRank, currentRank + 1)
+        fac(accumulator * currentRank, currentRank -1)
     }
-    fac(n, 1)
+    fac(1, n)
   }
 
   /*
@@ -566,7 +565,10 @@ object Mathematics {
    * @param String
    * @return BigInt
    */
-  def sumFactoDigitConcise(numberString: String): BigInt = numberString.map(i => factorial(BigInt(i.toString))).sum
+  def sumFactoDigit(numberString: String ): BigInt ={
+    val nToFacto = HashMap[BigInt, BigInt]()
+    		numberString.map( i => nToFacto.getOrElseUpdate( BigInt(i.toString) ,tailRecursiveFactorial(BigInt(i.toString)))).sum
+  }
 
   def allDigitDifferent(numberString: String): Boolean = numberString.distinct.length == 9
 
