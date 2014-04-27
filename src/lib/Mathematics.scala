@@ -601,7 +601,7 @@ object Mathematics {
       n.pow(n.toInt) + powerSumAll(n - 1)
   }
 
-  def mirror(n: Int) = n.toString.reverse.toInt
+  def mirror(n: BigInt) = BigInt( n.toString.reverse.toInt )
 
   /*
 	circlePermutations		gives all permutations of a number
